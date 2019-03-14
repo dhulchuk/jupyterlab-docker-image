@@ -1,20 +1,23 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 
-LABEL maintainer="Daniel Baptista <danielbpdias@gmail.com>"
+LABEL maintainer="Danyla Hulchuk <danyla.hulchuk@gmail.com>"
 
 # Replace shell with bash so we can source files
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-# Update the apt-get and installs curl
+# Update the apt-get and installs utils
 RUN apt-get update \
-  && apt-get install -y curl
+  && apt-get install -y curl gnupg2 software-properties-common
+
+# Add repo for python3.7
+RUN add-apt-repository -y ppa:deadsnakes/ppa
 
 # Update node version on apt-get
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # Run simulated install to check latest package versions in repository
-# RUN apt-cache policy \
-#   python3 \
+#RUN apt-cache policy \
+#   python3.7 \
 #   python3-pip \
 #   python3-setuptools \
 #   nodejs \
@@ -23,12 +26,17 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
 
 # Installs node.js, python, pip and setup tools
 RUN apt-get install -y \
-    python3=3.6.3-0ubuntu2 \
-    python3-pip=9.0.1-2 \
-    python3-setuptools=36.2.7-2 \
-    nodejs=9.11.1-1nodesource1 \
+    python3.7=3.7.2-1+bionic1 \
+    python3-pip=9.0.1-2.3~ubuntu1 \
+    python3-setuptools=39.0.1-2 \
+    nodejs=10.15.3-1nodesource1 \
     build-essential=12.4ubuntu1 \
-    libzmq3-dev=4.2.1-4ubuntu1
+    libzmq3-dev=4.2.5-1ubuntu0.1
+
+# Set default python3 to python3.7
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 10
+
+#RUN python3 --version
 
 # Setup python language
 ENV LANG en_US.UTF-8
@@ -43,7 +51,7 @@ RUN npm install npm@latest -g
 # Install jupyter notebook
 RUN pip3 install \
   jupyter==1.0.0 \
-  jupyterlab==0.31.12
+  jupyterlab==0.35.4
 
 # Fix ipython kernel version
 RUN ipython3 kernel install
