@@ -18,6 +18,7 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 # Run simulated install to check latest package versions in repository
 #RUN apt-cache policy \
 #   python3.7 \
+#   python3.7-dev \
 #   python3-pip \
 #   python3-setuptools \
 #   nodejs \
@@ -26,7 +27,8 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # Installs node.js, python, pip and setup tools
 RUN apt-get install -y \
-    python3.7=3.7.2-1+bionic1 \
+    python3.7=3.7.3-1+bionic1 \
+    python3.7-dev=3.7.3-1+bionic1 \
     python3-pip=9.0.1-2.3~ubuntu1 \
     python3-setuptools=39.0.1-2 \
     nodejs=10.15.3-1nodesource1 \
