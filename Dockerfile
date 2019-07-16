@@ -27,13 +27,13 @@ RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 
 # Installs node.js, python, pip and setup tools
 RUN apt-get install -y \
-    python3.7=3.7.3-1+bionic1 \
-    python3.7-dev=3.7.3-1+bionic1 \
-    python3-pip=9.0.1-2.3~ubuntu1 \
+    python3.7=3.7.4-1+bionic2 \
+    python3.7-dev=3.7.4-1+bionic2 \
+    python3-pip=9.0.1-2.3~ubuntu1.18.04.1 \
     python3-setuptools=39.0.1-2 \
-    nodejs=10.15.3-1nodesource1 \
+    nodejs=10.16.0-1nodesource1 \
     build-essential=12.4ubuntu1 \
-    libzmq3-dev=4.2.5-1ubuntu0.1
+    libzmq3-dev=4.2.5-1ubuntu0.2
 
 # Set default python3 to python3.7
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 10
