@@ -53,7 +53,8 @@ RUN npm install npm@latest -g
 # Install jupyter notebook
 RUN pip3 install \
   jupyter==1.0.0 \
-  jupyterlab==0.35.4
+  jupyterlab==1.0.2 \
+  nbresuse==0.3.2
 
 # Fix ipython kernel version
 RUN ipython3 kernel install
